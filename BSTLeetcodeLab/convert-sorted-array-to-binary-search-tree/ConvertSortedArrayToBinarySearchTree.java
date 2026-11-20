@@ -1,4 +1,15 @@
-class Solution {
+public class ConvertSortedArrayToBinarySearchTree {
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
     public TreeNode sortedArrayToBST(int[] nums) {
         return buildTree(nums, 0, nums.length - 1);
     }
@@ -12,5 +23,25 @@ class Solution {
         root.left = buildTree(nums, left, mid - 1);
         root.right = buildTree(nums, mid + 1, right);
         return root;
+    }
+
+    //метод для проверки дерева(inorder)
+    private static void printInorder(TreeNode node) {
+        if (node == null) return;
+        printInorder(node.left);
+        System.out.print(node.val + " ");
+        printInorder(node.right);
+    }
+
+    public static void main(String[] args) {
+        ConvertSortedArrayToBinarySearchTree solution = new ConvertSortedArrayToBinarySearchTree();
+
+        int[] nums = {-10, -3, 0, 5, 9};
+        TreeNode root = solution.sortedArrayToBST(nums);
+
+        System.out.println("Root: " + root.val);
+        System.out.print("Inorder traversal: ");
+        printInorder(root);
+        System.out.println();
     }
 }
